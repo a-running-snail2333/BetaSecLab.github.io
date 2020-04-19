@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World | Hexo</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hello World | Hexo">
+  <title>内网渗透-提权篇 | Hexo</title>
+  <meta name="keywords" content=" -内网渗透 ">
+  <meta name="description" content="内网渗透-提权篇 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="any.run">
 <meta property="og:type" content="article">
@@ -314,19 +314,25 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-内网渗透-提权篇" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hello World</h1>
+        <h1 class="article-title">内网渗透-提权篇</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            
+            <a class="color1">-内网渗透</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-19 15:00:16'>2020-04-19 15:00</time>
+        创建时间:<time class="date" title='更新时间: 2019-04-26 15:35:26'>2019-04-10 08:12</time>
         
     </div>
     <div class="article-meta">
@@ -348,7 +354,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-windows系统下的提权"><span class="toc-text">0x00 windows系统下的提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-windows系统内核提权"><span class="toc-text">1) windows系统内核提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2）凭证存储"><span class="toc-text">2）凭证存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3）服务提权"><span class="toc-text">3）服务提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4）bypassUAC"><span class="toc-text">4）bypassUAC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5）键盘记录"><span class="toc-text">5）键盘记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-linux系统下的提权"><span class="toc-text">0x01 linux系统下的提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-linux系统内核提权"><span class="toc-text">1) linux系统内核提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-crontab提权"><span class="toc-text">2) crontab提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SUID提权"><span class="toc-text">3) SUID提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-PATH提权"><span class="toc-text">4) PATH提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-键盘记录"><span class="toc-text">5) 键盘记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-数据库提权"><span class="toc-text">0x02 数据库提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-mysql数据库提权"><span class="toc-text">1) mysql数据库提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-myssql数据库提权"><span class="toc-text">2) myssql数据库提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文章参考："><span class="toc-text">文章参考：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -364,19 +370,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>提权：提升操作系统权限；此篇文章主要是介绍系统提权的常规方法，提权方式在渗透实战中不是必须的过程。但是当需要抓取口令，删除系统软件，权限限制查看敏感文件等情况下，就需要进行权限提升。此篇文章总结整理了两大操作系统：linux系统和windows系统下常规提权方式。文章存在不足或错误请尽快与本人联系。</p>
+<a id="more"></a>
+<h1 id="0x00-windows系统下的提权"><a href="#0x00-windows系统下的提权" class="headerlink" title="0x00 windows系统下的提权"></a>0x00 windows系统下的提权</h1><p>windows操作系统下的权限包括：操作系统内核提权、凭证存储、</p>
+<h2 id="1-windows系统内核提权"><a href="#1-windows系统内核提权" class="headerlink" title="1) windows系统内核提权"></a>1) windows系统内核提权</h2><p>在经过常规手法web渗透或者钓鱼等操作获得基本权限(用户权限，或者服务权限)之后，最常用的方法就是windows系统的内核提权。这种方法是最普遍、最简单、最容易达到预期目标；<br><strong>查看系统补丁:</strong><br><strong>systeminfo   //cmd下执行可以查看系统版本，主机名，打补丁情况等</strong><br><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/3.png" alt="enter description here"><br><strong>wmic qfe get  Caption,Description,HotFixID,InstalledOn   //wmic方式查询系统补丁 wmic qfe list</strong><br><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/4.png" alt="enter description here"><br><strong>use post/windows/gather/enum_patches     //msf下模块</strong><br><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/5.png" alt="enter description here"><br><strong>Powershell Get-HotFix    //powershell脚本</strong><br><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/2.png" alt="enter description here"><br><strong>查询缺失补丁:</strong><br><strong>辅助工具：</strong> Windows-Exploit-Suggester： <a href="https://github.com/GDSSecurity/Windows-Exploit-Suggester/" target="_blank" rel="noopener">https://github.com/GDSSecurity/Windows-Exploit-Suggester/</a><br>首先收集sysinfo信息到.txt文件，并命名位systeminfo.txt。通过py脚本逐行调用并与微软公开的CVE库匹对，查看系统打补丁情况，并列出未打补丁的kb号以及对应可利用的exp地址；<br><strong>首先更新库：</strong> python Windows-Exploit-Suggester.py -u<br><strong>其次执行脚本：</strong> python  windows-exploit-suggester.py –database 2018-12-03-mssb.xls   –systeminfo  systeminfo.txt<br><strong>效果如图所示：</strong><br><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/1.png" alt="enter description here"></p>
+<h2 id="2）凭证存储"><a href="#2）凭证存储" class="headerlink" title="2）凭证存储"></a>2）凭证存储</h2><p>通常情况下，当一名黑客已经获取某个系统访问权想要进一步提升权限时，首先要做的第一步就是要搜索整个系统，探测是否存在本地管理员账户以及密码。现对于其他类型的提权方式，此方法更不容易被管理员发现。<br><strong>windows系统配置：</strong><br>管理员通常使用Windows系统进行部署服务，通过网络将该镜像部署到各种系统中，称为无人值守安装。此类方法进行安装存在的问题主要是，本地管理员密码以明文或Base-64编码的形式存储在不同的位置。</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:<span class="tag">\<span class="name">unattend</span></span>.xml</span><br><span class="line">C:<span class="tag">\<span class="name">Windows</span></span><span class="tag">\<span class="name">Panther</span></span><span class="tag">\<span class="name">Unattend</span></span>.xml</span><br><span class="line">C:<span class="tag">\<span class="name">Windows</span></span><span class="tag">\<span class="name">Panther</span></span><span class="tag">\<span class="name">Unattend</span></span><span class="tag">\<span class="name">Unattend</span></span>.xml</span><br><span class="line">C:<span class="tag">\<span class="name">Windows</span></span><span class="tag">\<span class="name">system</span></span>32<span class="tag">\<span class="name">sysprep</span></span>.inf</span><br><span class="line">C:<span class="tag">\<span class="name">Windows</span></span><span class="tag">\<span class="name">system</span></span>32<span class="tag">\<span class="name">sysprep</span></span><span class="tag">\<span class="name">sysprep</span></span>.xml</span><br></pre></td></tr></table></figure>
+<p>具体路径大体了解即可，通常在实战中可以通过相关工具进行搜索：<br>metasploit模块：post/windows/gather/enum_unattend<br>PowerSploit脚本：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Get</span>-UnattendedInstallFile</span><br><span class="line"><span class="keyword">Get</span>-Webconfig</span><br><span class="line"><span class="keyword">Get</span>-ApplicationHost</span><br><span class="line"><span class="keyword">Get</span>-SiteListPassword</span><br><span class="line"><span class="keyword">Get</span>-CachedGPPPassword</span><br><span class="line"><span class="keyword">Get</span>-RegistryAutoLogon</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h2 id="3）服务提权"><a href="#3）服务提权" class="headerlink" title="3）服务提权"></a>3）服务提权</h2><h2 id="4）bypassUAC"><a href="#4）bypassUAC" class="headerlink" title="4）bypassUAC"></a>4）bypassUAC</h2><h2 id="5）键盘记录"><a href="#5）键盘记录" class="headerlink" title="5）键盘记录"></a>5）键盘记录</h2><p>待更新。。。待更新。。。</p>
+<h1 id="0x01-linux系统下的提权"><a href="#0x01-linux系统下的提权" class="headerlink" title="0x01 linux系统下的提权"></a>0x01 linux系统下的提权</h1><h2 id="1-linux系统内核提权"><a href="#1-linux系统内核提权" class="headerlink" title="1) linux系统内核提权"></a>1) linux系统内核提权</h2><p>待更新。。。</p>
+<h2 id="2-crontab提权"><a href="#2-crontab提权" class="headerlink" title="2) crontab提权"></a>2) crontab提权</h2><p>待更新。。。</p>
+<h2 id="3-SUID提权"><a href="#3-SUID提权" class="headerlink" title="3) SUID提权"></a>3) SUID提权</h2><p>待更新。。。</p>
+<h2 id="4-PATH提权"><a href="#4-PATH提权" class="headerlink" title="4) PATH提权"></a>4) PATH提权</h2><p>待更新。。。</p>
+<h2 id="5-键盘记录"><a href="#5-键盘记录" class="headerlink" title="5) 键盘记录"></a>5) 键盘记录</h2><p>待更新。。。</p>
+<h1 id="0x02-数据库提权"><a href="#0x02-数据库提权" class="headerlink" title="0x02 数据库提权"></a>0x02 数据库提权</h1><p>待更新。。。</p>
+<h2 id="1-mysql数据库提权"><a href="#1-mysql数据库提权" class="headerlink" title="1) mysql数据库提权"></a>1) mysql数据库提权</h2><p>wmic process where name=”mysqld.exe” get priority<br>待更新。。。</p>
+<h2 id="2-myssql数据库提权"><a href="#2-myssql数据库提权" class="headerlink" title="2) myssql数据库提权"></a>2) myssql数据库提权</h2><p>待更新。。。</p>
+<h2 id="文章参考："><a href="#文章参考：" class="headerlink" title="文章参考："></a>文章参考：</h2><p><a href="https://pentestlab.blog/2017/04/24/windows-kernel-exploits/" target="_blank" rel="noopener">https://pentestlab.blog/2017/04/24/windows-kernel-exploits/</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
@@ -390,12 +403,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Hello World</p>
+    <p><span class="copy-title">文章标题:</span>内网渗透-提权篇</p>
     
     <p><span class="copy-title">本文作者:</span><a  title="一坨奔跑的蜗牛">一坨奔跑的蜗牛</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-04-19, 15:00:16</p>
-    <p><span class="copy-title">最后更新:</span>2020-04-19, 15:00:16</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/BetaSecLab.github.io/2020/04/19/hello-world/" title="Hello World">http://yoursite.com/2020/04/19/hello-world/</a>
+    <p><span class="copy-title">发布时间:</span>2019-04-10, 08:12:20</p>
+    <p><span class="copy-title">最后更新:</span>2019-04-26, 15:35:26</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/BetaSecLab.github.io/2019/04/10/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E6%8F%90%E6%9D%83%E7%AF%87/" title="内网渗透-提权篇">http://yoursite.com/2019/04/10/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E6%8F%90%E6%9D%83%E7%AF%87/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
