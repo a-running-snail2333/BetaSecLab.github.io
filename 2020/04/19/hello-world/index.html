@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>labs-vulhub_DC6 | Hexo</title>
-  <meta name="keywords" content=" labs ">
-  <meta name="description" content="labs-vulhub_DC6 | Hexo">
+  <title>Hello World | Hexo</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="Hello World | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="DC-6是一个易受攻击的实验环境，最终目的是让入侵者获得root权限，并读取flag。通过tweet可以联系到作者@DCAU7。DC_6使用的操作系统为Debian 64位，可以再virtualBox VM ware上直接运行。作者在后面列出了相关提示：">
 <meta property="og:type" content="article">
@@ -326,25 +326,19 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-labs-DC_6" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">labs-vulhub_DC6</h1>
+        <h1 class="article-title">Hello World</h1>
     
     <div class="article-meta">
         
         
         
-        
-        <span class="tag">
-            
-            <a class="color5">labs</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-19 23:19:48'>2020-04-19 22:22</time>
+        创建时间:<time class="date" title='更新时间: 2020-04-19 15:00:16'>2020-04-19 15:00</time>
         
     </div>
     <div class="article-meta">
@@ -366,7 +360,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤一、环境搭建"><span class="toc-text">步骤一、环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤二、主机发现"><span class="toc-text">步骤二、主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤三、端口探测"><span class="toc-text">步骤三、端口探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤四、访问web服务"><span class="toc-text">步骤四、访问web服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤五、利用工具对wordpress网站信息搜集"><span class="toc-text">步骤五、利用工具对wordpress网站信息搜集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤六、利用已知提示登录系统"><span class="toc-text">步骤六、利用已知提示登录系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤七、activity-monitor-漏洞利用"><span class="toc-text">步骤七、activity monitor 漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤八、漏洞利用与提权"><span class="toc-text">步骤八、漏洞利用与提权</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -382,47 +376,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>DC-6是一个易受攻击的实验环境，最终目的是让入侵者获得root权限，并读取flag。通过tweet可以联系到作者@DCAU7。DC_6使用的操作系统为Debian 64位，可以再virtualBox VM ware上直接运行。作者在后面列出了相关提示：<a id="more"></a></p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/usr/</span>share<span class="regexp">/wordlists/</span>rockyou.txt | <span class="keyword">grep</span> k01 &gt; passwords.txt</span><br></pre></td></tr></table></figure>
-<p><strong>靶场下载链接：</strong></p>
-<p>   Download: <a href="http://www.five86.com/downloads/DC-6.zip" target="_blank" rel="noopener">http://www.five86.com/downloads/DC-6.zip</a><br>   Download (Mirror): <a href="https://download.vulnhub.com/dc/DC-6.zip" target="_blank" rel="noopener">https://download.vulnhub.com/dc/DC-6.zip</a><br>   Download (Torrent): <a href="https://download.vulnhub.com/dc/DC-6.zip.torrent" target="_blank" rel="noopener">https://download.vulnhub.com/dc/DC-6.zip.torrent</a>     ( Magnet)</p>
-<h3 id="步骤一、环境搭建"><a href="#步骤一、环境搭建" class="headerlink" title="步骤一、环境搭建"></a><strong>步骤一、环境搭建</strong></h3><p>根据作者的安装说明，将压缩文件下载后，通过vm或者virtualbox打开即可，注意由于作者设置为桥接模式，为了试验方便此处可以人为改为NAT模式。</p>
-<h3 id="步骤二、主机发现"><a href="#步骤二、主机发现" class="headerlink" title="步骤二、主机发现"></a><strong>步骤二、主机发现</strong></h3><p>通过arp(地址解析协议)进行局域网内主机发现，arp是根据IP地址获取物理地址的一个TCP/IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。<strong>此处利用metasploit工具下auxiliary模块，通过arp协议发现内网主机的ip地址为192.168.71.132</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/1.png" alt="enter description here"></p>
-<h3 id="步骤三、端口探测"><a href="#步骤三、端口探测" class="headerlink" title="步骤三、端口探测"></a><strong>步骤三、端口探测</strong></h3><p>利用nmap工具进行端口探测，相信大家对于nmap已经相当熟悉了，下面列举了一些nmap常见参数：<br><strong>-A：一次扫描包含系统探测、版本探测、脚本扫描和跟踪扫描</strong><br>有端口扫描结果可知系统开放了两个端口：22端口(ssh)，80端口(http)。此处有两个利用思路，第一种是通过hydra对ssh服务进行爆破，第二种思路则是通过web进行渗透。可以进一步发现http服务被重定向到了<code>http://wordy/</code>  </p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/2.png" alt="enter description here"></p>
-<h3 id="步骤四、访问web服务"><a href="#步骤四、访问web服务" class="headerlink" title="步骤四、访问web服务"></a><strong>步骤四、访问web服务</strong></h3><p>由于web服务被重定向到了<a href="http://wordy/" target="_blank" rel="noopener">http://wordy/</a> 此时可以本地添加域名到主机文件，这样以后我们访问<code>http://wordy/</code> 就相当于访问对应的ip地址。添加完域名及对应ip后，可以发现已经能够访问<code>http://wordy/</code><br><strong>vim /etc/hosts</strong></p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/3.png" alt="enter description here"></p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/4.png" alt="enter description here"></p>
-<h3 id="步骤五、利用工具对wordpress网站信息搜集"><a href="#步骤五、利用工具对wordpress网站信息搜集" class="headerlink" title="步骤五、利用工具对wordpress网站信息搜集"></a><strong>步骤五、利用工具对wordpress网站信息搜集</strong></h3><p>查看打开的页面为wordpress搭建的web环境，利用工具wpscan对该web环境进黑盒扫描(WPScan是一个扫描WordPress漏洞的黑盒子扫描器)，可以获取到wordpress的版本，主题，插件，后台用户以及后台用户密码等。执行过程如下：<br>执行指令：<code>wpscan --url http://wordy --enumerate vp --enumerate vt --enumerate t --enumerate u</code></p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/5.png" alt="enter description here"></p>
-<p>获取到的可用信息如下：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">url链接：</span><br><span class="line"><span class="string">http:</span><span class="comment">//wordy/xmlrpc.php</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//wordy/readme.html</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//wordy/wp-cron.php</span></span><br><span class="line">wordpress版本为：<span class="number">5.1</span><span class="number">.1</span></span><br><span class="line"><span class="string">Author:</span> the WordPress team</span><br><span class="line">枚举出的用户姓名如下：</span><br><span class="line">admin</span><br><span class="line">graham</span><br><span class="line">mark</span><br><span class="line">sarah</span><br><span class="line">jens</span><br></pre></td></tr></table></figure>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="步骤六、利用已知提示登录系统"><a href="#步骤六、利用已知提示登录系统" class="headerlink" title="步骤六、利用已知提示登录系统"></a><strong>步骤六、利用已知提示登录系统</strong></h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/usr/</span>share<span class="regexp">/wordlists/</span>rockyou.txt | <span class="keyword">grep</span> k01 &gt; passwords.txt</span><br></pre></td></tr></table></figure>
-<p>在kali系统执行词条语句，生成密码字典passwords.txt</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/6.png" alt="enter description here"></p>
-<p>根据枚举出的用户名和密码进行登录（<code>http://wordy/wp-login.php</code> ）可以看到如下图所示界面，通过wordspress管理后台分析，并没有发现可以利用的漏洞。此时尝试寻找是否存在插件漏洞：activity monitor</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/7.png" alt="enter description here"></p>
-<h3 id="步骤七、activity-monitor-漏洞利用"><a href="#步骤七、activity-monitor-漏洞利用" class="headerlink" title="步骤七、activity monitor 漏洞利用"></a><strong>步骤七、activity monitor 漏洞利用</strong></h3><p>将45274.html中的内容根据如下格式进行修改：</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/8.png" alt="enter description here"></p>
-<p><code>nc -l -v  -p  9999</code> 在本机进行监听，通过web访问45274.html文件，点击运行后。可以看到nc成功反弹，效果如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/9.png" alt="enter description here"></p>
-<p>进一步执行如下指令获取完整的shell:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -<span class="built_in">c</span> '<span class="keyword">import</span> pty; pty.spawn("/bin/bash")'</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/10.png" alt="enter description here"></p>
-<p>通过目录查看，发现在<code>/home/mark/stuff</code>目录下存在<code>thing-to-do.txt</code>文件，其内容为：</p>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Things to do:</span><br><span class="line">-<span class="ruby"> Restore full functionality <span class="keyword">for</span> the hyperdrive (need to speak to Jens)</span></span><br><span class="line"><span class="ruby">- Buy present <span class="keyword">for</span> Sarah<span class="string">'s farewell party</span></span></span><br><span class="line"><span class="ruby">- Add new <span class="symbol">user:</span> graham - GSo7isUM1D4 - done</span></span><br><span class="line"><span class="ruby">- Apply <span class="keyword">for</span> the OSCP course</span></span><br><span class="line"><span class="ruby">- Buy new laptop <span class="keyword">for</span> Sarah<span class="string">'s replacement</span></span></span><br></pre></td></tr></table></figure>
-<p>添加了一个用户graham 口令为 GSo7isUM1D4 ，因为系统开放了22端口，此时可以通过ssh登录该用户。</p>
-<h3 id="步骤八、漏洞利用与提权"><a href="#步骤八、漏洞利用与提权" class="headerlink" title="步骤八、漏洞利用与提权"></a><strong>步骤八、漏洞利用与提权</strong></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ssh</span> <span class="selector-tag">graham</span><span class="keyword">@192</span>.168.1.103</span><br><span class="line">输入登录口令：GSo7isUM1D4</span><br></pre></td></tr></table></figure>
-<p>ssh成功进行了登录，此时登录用户为graham。</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/11.png" alt="enter description here"></p>
-<p>继续输入 <code>sudo -l</code> 查看可执行的操作。发现能够以jens用户，不使用口令执行情况下执行backups.sh。打开文件backups.sh为一个文件减压的命令行，可将减压指令删除，换成<code>/bin/bash</code> 以jens用户去执行操作。</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/12.png" alt="enter description here"></p>
-<p>此时用户为jens，进一步，继续执行<code>sudo -l</code> 查询可执行的操作，发现能够以root用户，在不使用口令的的情况下执行nmap。故可通过nmap指令调用自己设定好的脚本如执行/bin/bash。<br>新建一个nmap可执行的脚本 root.nse，输入如下内容：</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/13.png" alt="enter description here"></p>
-<p>通过nmap运行该root.nse脚本，进入root用户。</p>
-<p><img src="https://raw.githubusercontent.com/a-running-snail2333/blog.github.io/master/picture/labs-DC6/14.png" alt="enter description here"></p>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
