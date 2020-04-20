@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>web安全-xss | Hexo</title>
-  <meta name="keywords" content=" -web安全 ">
-  <meta name="description" content="web安全-xss | Hexo">
+  <title>about | Hexo</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="about | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="DC-6是一个易受攻击的实验环境，最终目的是让入侵者获得root权限，并读取flag。通过tweet可以联系到作者@DCAU7。DC_6使用的操作系统为Debian 64位，可以再virtualBox VM ware上直接运行。作者在后面列出了相关提示：">
 <meta property="og:type" content="article">
@@ -326,25 +326,19 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-web安全-xss" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">web安全-xss</h1>
+        <h1 class="article-title">about</h1>
     
     <div class="article-meta">
         
         
         
-        
-        <span class="tag">
-            
-            <a class="color2">-web安全</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-04-03 10:21:34'>2019-03-02 10:12</time>
+        创建时间:<time class="date" title='更新时间: 2020-04-20 12:53:02'>2020-04-20 12:51</time>
         
     </div>
     <div class="article-meta">
@@ -382,46 +376,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> 跨站脚本攻击（XSS）是web应用漏洞中最为常见的攻击方式之一。攻击者利用网站程序对用户输入过滤不足的缺陷，输入刻意显示在页面上对其他用户造成影响的html代码，从而盗取用户资料、利用用户身份进行某种动作或者对访问者进行病毒侵害的一种攻击方式。通常在 <a id="more"></a>用户可控制或者可输入内容的地方易于出现XSS攻击，例如url参数或者可输入框。</p>
-<p><strong>XSS跨站脚本攻击</strong><br><em>0X01 XSS漏洞利用原理<br>0X02 XSS分类<br>0X03 存储型XSS利用方式<br>0X04 反射型XSS利用方式<br>0X05 XSS攻击绕过过滤方式<br>0X06 XSS防御措施</em><br><strong>0X01 XSS原理简介、</strong></p>
-<blockquote>
-<p>跨站脚本攻击（XSS）是web应用漏洞中最为常见的攻击方式之一。攻击者利用网站程序对用户输入过滤不足的缺陷，输入刻意显示在页面上对其他用户造成影响的html代码，从而盗取用户资料、利用用户身份进行某种动作或者对访问者进行病毒侵害的一种攻击方式。通常在用户可控制或者可输入内容的地方易于出现XSS攻击，例如url参数或者可输入框。<br><strong>0X02 XSS分类、</strong><br><em>按XSS的利用方式可以分为反射型XSS、存储型XSS、基于DOM的XSS</em><br><strong>反射型XSS：</strong>将用户输入的数据通过URL的形式直接或者未经过完善的安全过滤就在浏览器中进行输出，会导致输出的数据中存在可被浏览器执行的代码数据。<br><strong>存储型XSS：</strong>将用户输入的数据信息保存在服务端的数据库或者其它文件中，网页惊醒数据查询展示时，会从数据库中获取数据内容，并将数据内容在网页中进行输出展示。只要用户访问具有XSS攻击攻击脚本的网页就会出发攻击效果。<br><strong>DOM型XSS攻击：</strong>由于javascript的DOM节点编程可以改变HTML代码这个特性而形成的XSS攻击。</p>
-</blockquote>
-<p><strong>0X03 存储型XSS利用方式、</strong><br><em>XSS攻击成功必须要满足以下四个条件：</em><br>（1）入库处理<br>&#8195;&#8195; 1）目标网站由攻击者可以控制的输入点；<br>&#8195;&#8195; 2）输入信息可以在受害者浏览器显示；<br>&#8195;&#8195; 3）可以通过一定方法绕或防护；<br>（2）出库处理<br>&#8195;&#8195; 1）浏览器将输入解析为脚本，并具备执行该脚本的能力；<br><em>存储型XSS攻击基本流程：</em><br>（1）寻找注入点：留言板、在线信箱、评论栏等常见功能出；<br>（2）测试输出位置：输入内容需要在用户页面上进行展示才能展开XSS攻击；在一些应用功能中无法查看输出位置，可以进行“XSS盲打后台”<br>（3）弹窗测试；</p>
-<p><strong>0X04 反射型XSS利用方式、</strong><br><em>反射型XSS攻击基本流程：</em><br>（1）寻找注入点：URL参数可控等；<br>（2）诱骗或者加密变形；<br>（3）实施钓鱼攻击；</p>
-<p><strong>0X05 XSS攻击绕过方式</strong><br><strong>入门级</strong><br>(1)html —— 简单标签注入：当可输入区域位于HTML标签属性值内或者标签外部时使用；</p>
-<pre><code class="xml">&lt;svg onload=alert(/xss/)&gt;</code></pre>
-<p>（2）html —— 块标签注入：当输入区域位于以下标签内部或者标签中间时使用，此处用</tag>表示下面所给出的标签；</p>
-<pre><code class="xml">&lt;script&gt;&lt;textarea&gt;&lt;noscript&gt;&lt;pre&gt;&lt;xmp&gt;&lt;iframe&gt;
-适用方法：
-&lt;/tag&gt;&lt;svg onload=alert(1)&gt;
-&quot;&gt;&lt;/tag&gt;&lt;svg onload=alert(1)&gt; //总之就是想尽一切办法闭合标签，执行&lt;svg onload=alert(1)&gt;</code></pre>
-<p>（3）html —— 内联注入：当输入的区域在html标签属性值内部，但是此标签不能以大于号（&gt;）结束；</p>
-<pre><code class="lsl">&quot; onmouseover=alert(1)//   ### onmouseover 属性不适用以下元素：&lt;base&gt;、&lt;bdo&gt;、&lt;br&gt;、&lt;head&gt;、&lt;html&gt;、&lt;iframe&gt;、&lt;meta&gt;、&lt;param&gt;、&lt;script&gt;、&lt;style&gt; 或 &lt;title&gt;。
-&quot; autofocus/onfocus=alert(1)//</code></pre>
-<p>（4）html-源注入：当输入区域作为以下html输入标签属性值时，对于src属性可以再其属性值内使用一个带有url地址的script标签或者“data:,alert(1)”.</p>
-<pre><code class="haskell">javascript:alert(1)   //javascript伪协议：并不是所有web浏览器都支持，具有一定的局限性
-data:text/html,&lt;svg onload=alert(1)&gt;</code></pre>
-<p>（5）javascript —— 代码注入：当输入的区域位于script块中，并且是在字符串限定的内部时</p>
-<pre><code class="xml">&#39;-alert(1)-&#39;
-&#39;-alert(1)//
-例如：构造成如下形式：&lt;script&gt;&#39;&#39;-alert(1)-&#39;&#39;&lt;/script&gt;</code></pre>
-<p>（6）javascript —— 代码注入绕过：当输入的区域位于script块中，并且是在字符串限定的内部时，但是引号被\转义：</p>
-<pre><code class="lsl">\&#39;-alert(1)//</code></pre>
-<p>（7）javascript —— 标签注入：当输入位于script块的任何区域时：</p>
-<pre><code class="xml">&lt;/script&gt;&lt;svg onload=alert(1)&gt;</code></pre>
-<p><strong>进阶级</strong><br>(1)多反射——双反射(单输入)：同一页面的双重反射：</p>
-<pre><code class="lsl">&#39;onload=alert(1)&gt;&lt;svg/1=&#39;
-&#39;&gt;alert(1)&lt;/script&gt;&lt;script/1=&#39;
-*/alert(1)&lt;/script&gt;&lt;script&gt;/*</code></pre>
-<p>(2) 多反射—— 三反射（单输入）：</p>
-<pre><code class="scilab">*/alert(1)&quot;&gt;&#39;onload=&quot;/*&lt;svg/1=&#39;  svg/1 意思就相当于空格 将里鞥个之分开
-`-alert(1)&quot;&gt;&#39;onload=&quot;`&lt;svg/1=&#39;
-*/&lt;/script&gt;&#39;&gt;alert(1)/*&lt;script/1=&#39;</code></pre>
-<p>(3)多输入反射（双输入或者三输入）：在相同页面上双重输入反射</p>
-<pre><code class="ini">p=&lt;svg/1=&#39;&amp;q=&#39;onload=alert(1)&gt;
-p=&lt;svg 1=&#39;&amp;q=&#39;onload=&#39;/*&amp;r=*/alert(1)&#39;&gt;</code></pre>
-<p>(4)文件上传注入 —— 文件名：使用上传文件名在目标页面反射</p>
+        <p>qq群： web攻防&amp;内网渗透  639882908<br>公众号：BetaSecLab<br><img src="https://a-running-snail2333.github.io/BetaSecLab.github.io/picture/kali%E7%BE%8E%E5%8C%96/1.png" alt=""><br>注：相对于一上来就是各种实战记录，各种绕过姿势，本人更喜欢从原理搞懂。从为什么，到会怎么样，再到如何绕过。此博客会持续更新，更新方向为web安全、内网渗透、应急响应，如有发现帖子中存在问题和不足请随时和我沟通；<br><strong>渗透测试博客：</strong><br>AD安全博客：<a href="https://adsecurity.org/" target="_blank" rel="noopener">https://adsecurity.org/</a><br>FuzzySecurity博客：<a href="http://www.fuzzysecurity.com" target="_blank" rel="noopener">http://www.fuzzysecurity.com</a><br>先知社区：<a href="https://xz.aliyun.com/" target="_blank" rel="noopener">https://xz.aliyun.com/</a><br>Evi1cg博客：<a href="https://evi1cg.me/" target="_blank" rel="noopener">https://evi1cg.me/</a><br>Jirairya博客：<a href="http://b404.xyz/" target="_blank" rel="noopener">http://b404.xyz/</a><br>倾旋博客：<a href="https://payloads.online/" target="_blank" rel="noopener">https://payloads.online/</a><br>Times0g博客：<a href="https://times0ng.github.io/" target="_blank" rel="noopener">https://times0ng.github.io/</a><br>瓦都剋：<a href="http://byd.dropsec.xyz/" target="_blank" rel="noopener">http://byd.dropsec.xyz/</a><br>cate4cafe：<a href="http://cate4cafe.com/" target="_blank" rel="noopener">http://cate4cafe.com/</a><br>powershell wiki：<a href="https://www.peerlyst.com/posts/the-powershell-wiki-chiheb-chebbi" target="_blank" rel="noopener">https://www.peerlyst.com/posts/the-powershell-wiki-chiheb-chebbi</a><br>netwrix博客：<a href="https://blog.netwrix.com/" target="_blank" rel="noopener">https://blog.netwrix.com/</a><br>三好学生博客：<a href="https://3gstudent.github.io/3gstudent.github.io/" target="_blank" rel="noopener">https://3gstudent.github.io/3gstudent.github.io/</a><br>klion新博客：<a href="https://www.cnblogs.com/klionsec/" target="_blank" rel="noopener">https://www.cnblogs.com/klionsec/</a><br>klion旧博客：<a href="https://klionsec.github.io/" target="_blank" rel="noopener">https://klionsec.github.io/</a><br>EK博客：<a href="https://jivoi.github.io/archive/" target="_blank" rel="noopener">https://jivoi.github.io/archive/</a><br>走过岁月博客：<a href="http://securityer.lofter.com/view" target="_blank" rel="noopener">http://securityer.lofter.com/view</a><br>baozi博客：<a href="http://www.webbaozi.com/" target="_blank" rel="noopener">http://www.webbaozi.com/</a><br>信安之路：<a href="http://www.myh0st.cn/" target="_blank" rel="noopener">http://www.myh0st.cn/</a><br>Jdrops博客：<a href="http://jdrops.dropsec.xyz/" target="_blank" rel="noopener">http://jdrops.dropsec.xyz/</a><br>exploit collector：<a href="https://exploit.kitploit.com/" target="_blank" rel="noopener">https://exploit.kitploit.com/</a><br>Hello_C博客: <a href="http://zjw.dropsec.xyz/" target="_blank" rel="noopener">http://zjw.dropsec.xyz/</a><br>cxsecurity： <a href="https://cxsecurity.com/dorks" target="_blank" rel="noopener">https://cxsecurity.com/dorks</a><br>pentest： <a href="https://pentest.blog/" target="_blank" rel="noopener">https://pentest.blog/</a><br>rcoil： <a href="https://rcoil.me/" target="_blank" rel="noopener">https://rcoil.me/</a><br>Dayu： <a href="https://dayu.ink/" target="_blank" rel="noopener">https://dayu.ink/</a><br>04z: <a href="https://04z.net/" target="_blank" rel="noopener">https://04z.net/</a><br>attsckdebris： <a href="https://www.attackdebris.com/" target="_blank" rel="noopener">https://www.attackdebris.com/</a><br>原乌云：<a href="https://wooyun.js.org/" target="_blank" rel="noopener">https://wooyun.js.org/</a><br>corelan team：<a href="https://www.corelan.be/" target="_blank" rel="noopener">https://www.corelan.be/</a><br>landgrey：<a href="https://landgrey.me/" target="_blank" rel="noopener">https://landgrey.me/</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
