@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>文件上传漏洞 | BetaSecLab</title>
-  <meta name="keywords" content=" web渗透 ">
-  <meta name="description" content="文件上传漏洞 | BetaSecLab">
+  <title>应用端口及漏洞 | BetaSecLab</title>
+  <meta name="keywords" content=" 新建,模板,小书匠 ">
+  <meta name="description" content="应用端口及漏洞 | BetaSecLab">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="1、web服务类：               tomcat--80&#x2F;8080&#x2F;8009                             manager弱口令                             put上传webshell                             HTTP慢速攻击                             ajr文件包含漏洞">
 <meta property="og:type" content="article">
@@ -355,31 +355,25 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-web安全-文件上传漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-端口及漏洞" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">文件上传漏洞</h1>
+        <h1 class="article-title">应用端口及漏洞</h1>
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            
-                <a  data-rel="web渗透">web渗透</a>
-            
-        </span>
-        
         
         <span class="tag">
             
-            <a class="color1">web渗透</a>
+            <a class="color5">新建,模板,小书匠</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-20 14:53:44'>2019-03-09 00:00</time>
+        创建时间:<time class="date" title='更新时间: 2020-04-27 20:16:25'>2020-04-27 20:17</time>
         
     </div>
     <div class="article-meta">
@@ -401,7 +395,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-解析漏洞"><span class="toc-text">0x00 解析漏洞</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-上传检测流程概述"><span class="toc-text">0x01 上传检测流程概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-客户端检测绕过-javascript"><span class="toc-text">0x02 客户端检测绕过(javascript)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-服务端检测绕过MIME"><span class="toc-text">0x03 服务端检测绕过MIME</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-服务端检测绕过"><span class="toc-text">0x04 服务端检测绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#大小写绕过的方式"><span class="toc-text">大小写绕过的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可解析文件后缀绕过方式"><span class="toc-text">可解析文件后缀绕过方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#htaccess绕过方式"><span class="toc-text">.htaccess绕过方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-服务端检测绕过-文件内容检测"><span class="toc-text">0x05 服务端检测绕过(文件内容检测)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x06-上传攻击框架"><span class="toc-text">0x06 上传攻击框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#轻量型检测绕过攻击"><span class="toc-text">轻量型检测绕过攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路径-扩展名检测绕过攻击"><span class="toc-text">路径&#x2F;扩展名检测绕过攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件内容检测绕过攻击"><span class="toc-text">文件内容检测绕过攻击</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x07-安全防御措施"><span class="toc-text">0x07 安全防御措施</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、web服务类："><span class="toc-text">1、web服务类：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、数据库类"><span class="toc-text">2、数据库类:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、大数据类："><span class="toc-text">3、大数据类：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、文件共享："><span class="toc-text">4、文件共享：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、远程访问："><span class="toc-text">5、远程访问：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、邮件服务："><span class="toc-text">6、邮件服务：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、其他服务："><span class="toc-text">7、其他服务：</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -417,145 +411,166 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>文件上传漏洞可以说是日常渗透测试用得最多的一个漏洞，因为用它获得服务器权限最快最直接。但是想真正把这个漏洞利用好却不那么容易，其中有很多技巧，也有很多需要掌握的知识。俗话说，知己知彼方能百战不殆，因此想要研究怎么防护漏洞，就要了解怎么去利用。</p>
-<a id="more"></a>
-<p>0x00 解析漏洞<br>0x01 上传检测流程概述<br>0x02 客户端检测绕过（javascript）<br>0x03 服务端检测绕过MIME<br>0x04 服务端检测绕过(文件扩展名检测)<br>0x05 服务端检测绕过(文件内容检测)<br>0x06 上传攻击框架<br>0x07 安全防御措施</p>
-<h1 id="0x00-解析漏洞"><a href="#0x00-解析漏洞" class="headerlink" title="0x00 解析漏洞"></a><strong>0x00 解析漏洞</strong></h1><p>常见的web容器有：IIS、Apache、Nginx、Tomcat、Jboss、WebLogic<br>此处只整理了 IIS Apache Nginx;后续还会继续加入其它中间件漏洞<br><img src="http://blog.betaseclab.com/picture/upload_files/2.png" alt=""></p>
-<h1 id="0x01-上传检测流程概述"><a href="#0x01-上传检测流程概述" class="headerlink" title="0x01 上传检测流程概述"></a><strong>0x01 上传检测流程概述</strong></h1><p>A 客户端javascript检测；<br>B 服务端mime类型检测；<br>C 服务端目录路径检测；<br>D 服务端文件扩展名检测；<br>E 服务端文件内容检测；</p>
-<pre><code class="xml">&lt;?php
-$is_upload = false;
-$msg = null;
-define(&quot;UPLOAD_PATH&quot;, &quot;../upload/&quot;);
-if (isset($_POST[&#39;submit&#39;])) {
-    if (file_exists(UPLOAD_PATH)) {
-        if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], UPLOAD_PATH . &#39;/&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])){
-            $img_path = UPLOAD_PATH . $_FILES[&#39;upload_file&#39;][&#39;name&#39;];
-            $is_upload = true;
-        }
-    } else {
-        $msg = UPLOAD_PATH . &#39;文件夹不存在,请手工创建！&#39;;
-    }
-}
-?
-
-&lt;script type=&quot;text/javascript&quot;&gt;
-    function checkFile() {
-        var file = document.getElementsByName(&#39;upload_file&#39;)[0].value;
-        if (file == null || file == &quot;&quot;) {
-            alert(&quot;请选择要上传的文件!&quot;);
-            return false;
-        }
-        //定义允许上传的文件类型
-        var allow_ext = &quot;.jpg|.png|.gif&quot;;
-        //提取上传文件的类型
-        var ext_name = file.substring(file.lastIndexOf(&quot;.&quot;));
-        //判断上传文件类型是否允许上传
-        if (allow_ext.indexOf(ext_name) == -1) {
-            var errMsg = &quot;该文件不允许上传，请上传&quot; + allow_ext + &quot;类型的文件,当前文件类型为：&quot; + ext_name;
-            alert(errMsg);
-            return false;
-        }
-    }
-&lt;/script&gt;
-
-&lt;h3&gt;上传区&lt;/h3&gt;
-&lt;form enctype=&quot;multipart/form-data&quot; method=&quot;post&quot; onsubmit=&quot;return checkFile()&quot;&gt;
-  &lt;p&gt;请选择要上传的图片：&lt;p&gt;
-  &lt;input class=&quot;input_file&quot; type=&quot;file&quot; name=&quot;upload_file&quot;/&gt;
-  &lt;input class=&quot;button&quot; type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;上传&quot;/&gt;
-&lt;/form&gt;
-&lt;div id=&quot;msg&quot;&gt;
-    &lt;?php 
-        if($msg != null){
-            echo &quot;提示：&quot;.$msg;
-        }
-    ?&gt;
-&lt;/div&gt;
-&lt;div id=&quot;img&quot;&gt;
-    &lt;?php
-        if($is_upload){
-            echo &#39;&lt;img src=&quot;&#39;.$img_path.&#39;&quot; width=&quot;250px&quot; /&gt;&#39;;
-        }
-    ?&gt;
-&lt;/div&gt;</code></pre>
-<p>对以上代码进行讲解：<br><em>html部分：</em><br><code>&lt;h3&gt;</code> ：标签标题<br><code>&lt;form&gt;</code> ：标签用于为用户输入创建 HTML 表单，具体的属性值此处不做详细讲解，唯独注意的是文件上传需要将enctype属性设置为multipart/form-data。<br><code>&lt;input&gt;</code> ：标签用于输入标签，type属性规定输入的类型。<br><em>php部分：</em><br><code>isset</code>：检测变量是否设置。如果 var 存在并且值不是 NULL 则返回 TRUE，否则返回 FALSE<br><code>file_exists</code>：函数检查文件或目录是否存在。如果指定的文件或目录存在则返回 TRUE，否则返回 FALSE。<br><code>move_uploaded_file()</code>：函数把上传的文件移动到新位置。如果成功该函数返回 TRUE，如果失败则返回 FALSE。<br><code>$_files</code>：你可以从客户计算机向远程服务器上传文件。第一个参数是表单的name，第二个下标可以是name、type、size、tmp_name 或 error</p>
-<pre><code class="markdown">$_FILES[&quot;file&quot;][&quot;name&quot;] - 被上传文件的名称
-$_FILES[&quot;file&quot;][&quot;type&quot;] - 被上传文件的类型
-$_FILES[&quot;file&quot;][&quot;size&quot;] - 被上传文件的大小，以字节计
-$_FILES[&quot;file&quot;][&quot;tmp_name&quot;] - 存储在服务器的文件的临时副本的名称
-$_FILES[&quot;file&quot;][&quot;error&quot;] - 由文件上传导致的错误代码</code></pre>
-<p><code>strrchr()</code> 函数查找字符串在另一个字符串中最后一次出现的位置，并返回从该位置到字符串结尾的所有字符。<br><em>javascript部分</em><br><code>indexOf</code>：是查某个指定的字符串在字符串首次出现的位置;<br><code>lastIndexOf</code>：是查某个指定的字符串在字符串末尾出现的位置;<br><code>stringObject.substring(start,stop)</code>：substring() 方法用于提取字符串中介于两个指定下标之间的字符；</p>
-<h1 id="0x02-客户端检测绕过-javascript"><a href="#0x02-客户端检测绕过-javascript" class="headerlink" title="0x02 客户端检测绕过(javascript)"></a><strong>0x02 客户端检测绕过(javascript)</strong></h1><p>检测方式：<br>打开http反向代理burpsuite,选择所需要上传的webshell文件，点击”上传”，此时burpsuite中没有拦截到任何消息，但是弹出一条警告框，此时则可以认为客户端javascript检测。javascript检测方式较为简单，此处暂且省略。绕过方式也有很多种，burpsuite拦截更改后缀，浏览器禁用javascript等。</p>
-<h1 id="0x03-服务端检测绕过MIME"><a href="#0x03-服务端检测绕过MIME" class="headerlink" title="0x03 服务端检测绕过MIME"></a><strong>0x03 服务端检测绕过MIME</strong></h1><p>此处只更改php中的代码，更改方式如下：</p>
-<pre><code class="ruby">$is_upload = false;
-$msg = null;
-define(&quot;UPLOAD_PATH&quot;, &quot;../upload/&quot;);
-if (isset($_POST[&#39;submit&#39;])) {
-    if (file_exists(UPLOAD_PATH)) {
-        if (($_FILES[&#39;upload_file&#39;][&#39;type&#39;] == &#39;image/jpeg&#39;) || ($_FILES[&#39;upload_file&#39;][&#39;type&#39;] == &#39;image/png&#39;) || ($_FILES[&#39;upload_file&#39;][&#39;type&#39;] == &#39;image/gif&#39;)) {
-            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], UPLOAD_PATH . &#39;/&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) {
-                $img_path = UPLOAD_PATH . $_FILES[&#39;upload_file&#39;][&#39;name&#39;];
-                $is_upload = true;
-            }
-        } else {
-            $msg = &#39;文件类型不正确，请重新上传！&#39;;
-        }
-    } else {
-        $msg = UPLOAD_PATH.&#39;文件夹不存在,请手工创建！&#39;;
-    }
-}
-?&gt;</code></pre>
-<p>有上可知，在php部分增加了一部分代码，用于在后端判断文件的类型：</p>
-<pre><code class="markdown">if (($_FILES[&#39;upload_file&#39;][&#39;type&#39;] == &#39;image/jpeg&#39;) || ($_FILES[&#39;upload_file&#39;][&#39;type&#39;] == &#39;image/png&#39;) || ($_FILES[&#39;upload_file&#39;][&#39;type&#39;] == &#39;image/gif&#39;)) </code></pre>
-<p>检测方式：<br>打开http反向代理burpsuite,选择所需要上传的webshell文件，点击”上传”，此时burpsuite中可以发现拦截信息，将Content-Type值改为image/png后点击转发，即可上传成功，具体操作过程演示如下：<br><img src="http://blog.betaseclab.com/picture/upload_files/1.png" alt=""></p>
-<h1 id="0x04-服务端检测绕过"><a href="#0x04-服务端检测绕过" class="headerlink" title="0x04 服务端检测绕过"></a><strong>0x04 服务端检测绕过</strong></h1><p>服务端文件扩展名检测中，分为两种：基于黑名单的检测绕过，基于白名单的检测绕过；黑名单检测安全性相对于白名单低很多，绕过方式也多种多样：<br>（1）文件名大小写绕过；<br>（2）名单列表绕过；<br>（3）特殊文件名绕过；例如：发送的http包中把文件名改为test.asp. 或者 test.asp_ 这种文件名命名方式在windows系统下是不被允许的，通过burpsuite进行修改，然后绕过验证后，会被windows系统自动去掉后面的点和空格，注意linux系统中没有这种特性；</p>
-<h2 id="大小写绕过的方式"><a href="#大小写绕过的方式" class="headerlink" title="大小写绕过的方式"></a><em>大小写绕过的方式</em></h2><p>在php增加部分代码：</p>
-<pre><code class="mel"> $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;); //危险文件后缀黑名单
-$file_name = trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]); //获取文件名
-$file_name = deldot($file_name);//删除文件名末尾的点
-$file_ext = strrchr($file_name, &#39;.&#39;); //获取后缀
-$file_ext = str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);//去除字符串::$DATA
-$file_ext = trim($file_ext); //首尾去空
-if (!in_array($file_ext, $deny_ext))</code></pre>
-<p>通过上面代码可以分析，是基于黑名单的过滤方式，分别进行了去除文件名的点、空格操作，随后匹配危险后缀名，但是缺少大小写转换，故此时可以通过大小写绕过。将文件后缀名改为.PHP .PHp .PhP等即可绕过。</p>
-<h2 id="可解析文件后缀绕过方式"><a href="#可解析文件后缀绕过方式" class="headerlink" title="可解析文件后缀绕过方式"></a><em>可解析文件后缀绕过方式</em></h2><p>在php增加部分代码：</p>
-<pre><code class="mel">$deny_ext = array(&#39;.asp&#39;,&#39;.aspx&#39;,&#39;.php&#39;,&#39;.jsp&#39;，&#39;.htaccess&#39;);
-$file_name = trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);
-$file_name = deldot($file_name);//删除文件名末尾的点
-$file_ext = strrchr($file_name, &#39;.&#39;);
-$file_ext = strtolower($file_ext); //转换为小写
-$file_ext = str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);//去除字符串::$DATA
-$file_ext = trim($file_ext); //收尾去空
-if(!in_array($file_ext, $deny_ext))</code></pre>
-<p>通过代码可以分析，是基于黑名单的过滤方式，分别进行了去除文件名的点、空格操作，随后匹配危险后缀名，此时危险后缀名并没有写全，此时可以根据黑名单过滤不全进行绕过：可以将后缀名改为 .php5 .php3等进行绕过。对于可解析的后缀名作如下总结：</p>
-<pre><code class="smalltalk">asp|asa|cer|cdx|aspx|ashx|ascx|asax
-php|php2|php3|php4|php5|htaccess
-jsp|jspx</code></pre>
-<h2 id="htaccess绕过方式"><a href="#htaccess绕过方式" class="headerlink" title=".htaccess绕过方式"></a><em>.htaccess绕过方式</em></h2><pre><code class="mel">$deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;php1&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;pHp1&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;);
-$file_name = trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);
-$file_name = deldot($file_name);//删除文件名末尾的点
-$file_ext = strrchr($file_name, &#39;.&#39;);
-$file_ext = strtolower($file_ext); //转换为小写
-$file_ext = str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);//去除字符串::$DATA
-$file_ext = trim($file_ext); //收尾去空
-if (!in_array($file_ext, $deny_ext))</code></pre>
-<p>通过代码可以分析，是基于黑名单的过滤方式，分别进行了去除文件名的点、空格操作，随后匹配危险后缀名,几乎涵盖了所有的危险后缀名，但是发现没有.htaccess。故此时可以先上传.htaccess文件，此时就能将任意文件格式解析为php,再上传一个图片格式的木马即可；其.htaccess文件内容如下：</p>
-<pre><code class="nginx">SetHandler application/x-httpd-php</code></pre>
-<h1 id="0x05-服务端检测绕过-文件内容检测"><a href="#0x05-服务端检测绕过-文件内容检测" class="headerlink" title="0x05 服务端检测绕过(文件内容检测)"></a><strong>0x05 服务端检测绕过(文件内容检测)</strong></h1><p>文件幻术检测<br>文件加载检测</p>
-<h1 id="0x06-上传攻击框架"><a href="#0x06-上传攻击框架" class="headerlink" title="0x06 上传攻击框架"></a><strong>0x06 上传攻击框架</strong></h1><h2 id="轻量型检测绕过攻击"><a href="#轻量型检测绕过攻击" class="headerlink" title="轻量型检测绕过攻击"></a><em>轻量型检测绕过攻击</em></h2><pre><code class="vbscript">绕过javascript对扩展名的检测；
-绕过服务端对http request包mime类型的检测</code></pre>
-<h2 id="路径-扩展名检测绕过攻击"><a href="#路径-扩展名检测绕过攻击" class="headerlink" title="路径/扩展名检测绕过攻击"></a><em>路径/扩展名检测绕过攻击</em></h2><pre><code class="lsl">黑名单绕过
-大小写绕过
-特殊文件名绕过
-0x00截断绕过
-.htaccess文件攻击
-本地包含漏洞
-apache解析漏洞
-iis解析漏洞
-nginx解析漏洞
-白名单绕过</code></pre>
-<h2 id="文件内容检测绕过攻击"><a href="#文件内容检测绕过攻击" class="headerlink" title="文件内容检测绕过攻击"></a><em>文件内容检测绕过攻击</em></h2><pre><code>文件进行一句话代码注入，配合文件解析漏洞/文件包含漏洞等；</code></pre><h1 id="0x07-安全防御措施"><a href="#0x07-安全防御措施" class="headerlink" title="0x07 安全防御措施"></a><strong>0x07 安全防御措施</strong></h1><p>基于白名单的过滤方式；<br>对于文件进行重命名(随机数字，或者日期)或者将文件名转换成小写，去空格去点；<br>攻击者不能自己创建目录；<br>降低上传文件的执行权限；<br>网站根目录增设.htaccess文件，限定可解析文件类型；</p>
-
+        <h4 id="1、web服务类："><a href="#1、web服务类：" class="headerlink" title="1、web服务类："></a>1、web服务类：</h4><pre><code>               tomcat--80/8080/8009
+                            manager弱口令
+                            put上传webshell
+                            HTTP慢速攻击
+                            ajr文件包含漏洞-CVE-2020-1938
+               Jboss--8080
+                            后台弱口令
+                            console后台部署war包
+                            JAVA反序列化
+                            远程代码执行
+               webSphere--9080
+                            后台弱口令
+                            任意文件泄露
+                            JAVA反序列化
+               weblogic--7001/7002
+                            后台弱口令
+                            console后台部署war包
+                            SSRF
+                            测试页面上传webshell
+                                    JAVA反序列化
+                                        CVE-2018-2628
+                                        CVE-2018-2893
+                                        CVE-2017-10271
+                                        CVE-2019-2725
+                                        CVE-2019-2729
+               Glassfish--8080/4848
+                            暴力破解
+                            任意文件读取
+                            认证绕过
+               Jetty--8080
+                            远程共享缓冲区溢出
+               Apache--80/8080
+                            HTTP慢速攻击
+                            解析漏洞
+                            目录遍历
+               Apache Solr--8983
+                            远程命令执行
+                            CVE-2017-12629
+                            CVE-2019-0193
+                IIS--80
+                            put上传webshell
+                            IIS解析漏洞
+                            IIS提权
+                            IIS远程远程代码执行-CVE-2017-7269
+                Resin--8080
+                            目录遍历
+                            远程文件读取
+                Axis2--8080
+                            后台弱口令
+                Lutos--1352
+                            后台弱口令
+                            信息泄露
+                            跨站脚本攻击
+                Nginx--80/443
+                            HTTP慢速攻击
+                            解析漏洞</code></pre><h4 id="2、数据库类"><a href="#2、数据库类" class="headerlink" title="2、数据库类:"></a>2、数据库类:</h4><pre><code>                Mysql--3306
+                            弱口令
+                            身份认证漏洞-cve-2012-2122
+                            拒绝服务攻击
+                            phpmyadmin万能密码or弱口令
+                            UDF/MOF提权
+                Mssql--1433
+                            弱口令
+                            存储过程提权
+                Oralce--1521
+                            弱口令
+                            TNS漏洞
+                Redis--6379
+                            弱口令
+                            未经授权访问
+                PostgreSQL--5432
+                            弱口令
+                            缓冲区溢出-cve-2014-2669
+                MongoDB--27001
+                            弱口令
+                            未经授权访问
+                DB2--5000
+                            安全限制绕过进行未经授权操作-cve-2015-1922
+                SysBase--5000/4100
+                            弱口令
+                            命令注入
+                Memcache--11211
+                            未经授权访问
+                            配置漏洞
+                ElasticSearch--9200/9300
+                            未经授权访问
+                            远程代码执行
+                            文件办理
+                            写入webshell   </code></pre><h4 id="3、大数据类："><a href="#3、大数据类：" class="headerlink" title="3、大数据类："></a>3、大数据类：</h4><pre><code>                Hadoop--50010
+                            远程命令执行
+                Zookeeper--2181
+                            未经授权访问</code></pre><h4 id="4、文件共享："><a href="#4、文件共享：" class="headerlink" title="4、文件共享："></a>4、文件共享：</h4><pre><code>                Ftp--21
+                            弱口令
+                            匿名访问
+                            上传后门
+                            远程溢出
+                            跳转攻击
+                NFS--2049
+                            未经授权访问
+                Samba--137
+                            弱口令
+                            未经授权访问
+                            远程代码执行-CVE-2015-0240
+                LDAP--389
+                            弱口令
+                            注入
+                            未经授权访问</code></pre><h4 id="5、远程访问："><a href="#5、远程访问：" class="headerlink" title="5、远程访问："></a>5、远程访问：</h4><pre><code>               SSH--22
+                            弱口令
+                            28退格漏洞
+                            OpenSSL漏洞
+                            用户名枚举
+               Telent--23
+                            弱口令
+               RDP--3389
+                            弱口令
+                            Shitf粘滞键后门
+                            缓冲区溢出
+                            MS12-020
+                            CVE-2019-0708
+                VNC--5901
+                            弱口令
+                            认证口令绕过
+                            拒绝服务攻击-CVE-2015-5239
+                            权限提升-CVE-2013-6886
+                Pcanywhere--5632
+                            拒绝服务攻击
+                            权限提升
+                            代码执行
+                X11--6000
+                            未经授权访问-CVE-1999-0526</code></pre><h4 id="6、邮件服务："><a href="#6、邮件服务：" class="headerlink" title="6、邮件服务："></a>6、邮件服务：</h4><pre><code>               SMTP--25/465
+                            弱口令
+                            未经授权访问
+                            邮件伪造
+               POP3--110/995
+                            弱口令
+                            未经授权访问
+               IMAP--143/993
+                            弱口令
+                            任意文件读取</code></pre><h4 id="7、其他服务："><a href="#7、其他服务：" class="headerlink" title="7、其他服务："></a>7、其他服务：</h4><pre><code>               DNS--53
+                            DNS区域传输
+                            DNS劫持
+                            DNS欺骗
+                            DNS缓存投毒
+                            DNS隧道
+               DHCP--67/68
+                            DHCP劫持
+                            DHCP欺骗
+               SNMP--161
+                            弱口令
+               Rlogin--512/513/514
+                            rlogin登录
+               Rsync--873
+                            未经授权访问
+                            本地权限提升
+               Zabbix--8069
+                            远程命令执行
+               RMI--1090/1099
+                            JAVA反序列化
+               Docker--2375
+                            未经授权访问</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
     </div>
